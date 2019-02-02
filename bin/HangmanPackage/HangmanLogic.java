@@ -1,6 +1,9 @@
 package HangmanPackage;
 
+
+
 public class HangmanLogic {
+
 	private String Hangman1 = "   ____";
 	private String Hangman2 = "   |    o  ";
 	private String Hangman3 = "   |   /|\\   ";
@@ -10,6 +13,7 @@ public class HangmanLogic {
 	private String Hangman7 = "|   |______  ";
 	private String Hangman8 = "|              |  ";
 	private String Hangman9 ="|__________| ";
+	
  public void printHangMan () {
 	 System.out.println(Hangman1);
 	 System.out.println(Hangman2);
