@@ -1,7 +1,5 @@
 package HangmanPackage;
 
-asdasd
-
 public class HangmanMain {
 
 	
@@ -13,3 +11,4 @@ public class HangmanMain {
 System.out.println("test");
 	}
 }
+ 
