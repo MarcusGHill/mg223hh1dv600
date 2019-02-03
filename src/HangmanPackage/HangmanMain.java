@@ -7,7 +7,12 @@ public class HangmanMain {
 		ReadWordsFromWeb rwfw = new ReadWordsFromWeb();
 		HangmanLogic hl = new HangmanLogic();
 		rwfw.ReadInput();
-		hl.printHangMan();
+		hl.initializeHangMan();
+		for(int i = 0; i < 9; i ++ ) {
+			hl.getNextPiece();
+		}
+	
+		
 
 	}
 }

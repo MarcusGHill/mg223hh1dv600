@@ -1,31 +1,27 @@
 package HangmanPackage;
 
-
+import java.util.ArrayList;
 
 public class HangmanLogic {
 
-	private String Hangman1 = "   ____";
-	private String Hangman2 = "   |    o  ";
-	private String Hangman3 = "   |   /|\\   ";
-	private String Hangman4 = "   |     |  ";
-	private String Hangman5 = "   |   /  \\";
-	private String Hangman6 = " _|_ ";
-	private String Hangman7 = "|   |______  ";
-	private String Hangman8 = "|              |  ";
-	private String Hangman9 ="|__________| ";
+	private ArrayList <String> hangman = new ArrayList<String>();
+    private int count = 0;
 	
- public void printHangMan () {
-	 System.out.println(Hangman1);
-	 System.out.println(Hangman2);
-	 System.out.println(Hangman3);
-	 System.out.println(Hangman4);
-	 System.out.println(Hangman5);
-	 System.out.println(Hangman6);
-	 System.out.println(Hangman7);
-	 System.out.println(Hangman8);
-	 System.out.println(Hangman9);
-
-	 
-
+ public void initializeHangMan () {
+		hangman.add("   ____");
+		hangman.add( "   |    o  ");
+		hangman.add( "   |   /|\\   ");
+		hangman.add( "   |     |  ");
+		hangman.add( "   |   /  \\");
+		hangman.add( " _|_ ");
+		hangman.add(" |   |______  ");
+		hangman.add( "|              |  ");
+		hangman.add("|__________| ");
+ 
  }
+ public void getNextPiece () {
+	  System.out.println(hangman.get(count));
+	  count++;
+ }
+ 
 }
