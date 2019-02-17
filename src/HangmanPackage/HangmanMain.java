@@ -4,18 +4,12 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 public class HangmanMain {
-
+private static int wordMinSize = 9;
 	
 	public static void main (String[] args) throws MalformedURLException, IOException {
-		ReadWordsFromWeb rwfw = new ReadWordsFromWeb();
+
 		HangmanLogic hl = new HangmanLogic();
-		System.out.println(rwfw.ReadInput());
-		hl.initializeHangMan();
-		for(int i = 0; i < 9; i ++ ) {
-			hl.getNextPiece();
-		}
-	
-		
+		hl.menu();
 
 	}
 }

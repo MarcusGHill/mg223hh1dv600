@@ -10,23 +10,24 @@ import java.util.regex.Pattern;
 
 
 public class ReadWordsFromWeb {
- private String webpage = "https://en.wikipedia.org/wiki/Norway";
+ private String webpage = "https://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html";
+private BufferedReader br = null;
+private ArrayList<String> result = new ArrayList<String>();
+private ArrayList<String> resultTemp = new ArrayList<String>();
+private URL url;
+private  ArrayList<String> sb = new ArrayList<String>();
+private String line;
+private Pattern p;
+private  Matcher m1;
 	
-	public  ArrayList<String> ReadInput () throws IOException, MalformedURLException {
-		
-		//https://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
-		 BufferedReader br = null;
-		 ArrayList<String> result = new ArrayList<String>();
-		 ArrayList<String> resultTemp = new ArrayList<String>();
+	public void ReadInput (String inputWebpage) throws IOException, MalformedURLException {
+		if(inputWebpage.length() > 0) {
+			webpage = inputWebpage;
+		}
+		//
 	        try {
-	        	
-	            URL url = new URL(webpage);
+	            url = new URL(webpage);
 	            br = new BufferedReader(new InputStreamReader(url.openStream()));
-
-	            String line;
-
-	            ArrayList<String> sb = new ArrayList<String>();
-
 	            while ((line = br.readLine()) != null) {
 
 	                sb.add(line);
@@ -61,22 +62,31 @@ public class ReadWordsFromWeb {
 	   	         }
 	            	for(int i = 0; i <resultTemp.size(); i++) {	            	
 	            	// saves words longer than 10.
-	            	Pattern p = Pattern.compile("[a-zA-Z]+"); 
-	            	 Matcher m1 = p.matcher(resultTemp.get(i)); 
+	            	p = Pattern.compile("[a-zA-Z]+"); 
+	            	 m1 = p.matcher(resultTemp.get(i)); 
 	                 while (m1.find()) { 
 	                	 if(m1.group().length() > 10) {
 	                		 result.add(m1.group());  
 	                	 }
-	                    
 	                 } 
 	            }
 	            	}
-	            return result;
+	        } catch(MalformedURLException e) {
+	        	 System.out.println();
+				 System.out.println("the URL does not look right, try again and follow the format https://en.wikipedia.org/wiki/Stockholm");
+				 System.out.println();
+				 HangmanLogic hl = new HangmanLogic();
+				 hl.menu();
+	        } catch(IOException e) {
+	        	e.printStackTrace();
 	        } finally {
-
 	            if (br != null) {
 	                br.close();
 	            }
 	        }
 	    }
+	
+	public ArrayList<String> getResult() {
+		return result;
+	}
 	}
