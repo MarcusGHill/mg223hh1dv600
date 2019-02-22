@@ -30,10 +30,10 @@ public class HangmanLogic {
 	
  public void initializeHangMan () {
 		hangman.add("   ____");
-		hangman.add( "   |    o  ");
-		hangman.add( "   |   /|\\   ");
-		hangman.add( "   |    |  ");
-		hangman.add( "   |   / \\");
+		hangman.add( "  |    o  ");
+		hangman.add( "  |   /|\\   ");
+		hangman.add( "  |    |  ");
+		hangman.add( "  |   / \\");
 		hangman.add( " _|_ ");
 		hangman.add(" |   |______  ");
 		hangman.add( "|          |  ");
