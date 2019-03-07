@@ -28,6 +28,8 @@ public class HangmanLogic {
     private Boolean winGame = false;
     private char[] testForMatch;
 	
+    
+    // Populates the hangman Array list with the hangman 
  public void initializeHangMan () {
 		hangman.add("   ____");
 		hangman.add( "  |    o  ");
@@ -35,11 +37,17 @@ public class HangmanLogic {
 		hangman.add( "  |    |  ");
 		hangman.add( "  |   / \\");
 		hangman.add( " _|_ ");
-		hangman.add(" |   |______  ");
+		hangman.add( "|   |______ ");
 		hangman.add( "|          |  ");
-		hangman.add("|__________| ");
- 
+		hangman.add( "|__________| ");
  }
+ 
+ // Returns part of the hangman arraylist
+ public String getHangman(int position) {
+	 return hangman.get(position);
+ }
+ 
+ //Gets the next piece of the hangman
  public void getNextPiece (int amountOfWrongGuesses) {
 	  System.out.println(hangman.get(amountOfWrongGuesses));
 	  if(amountOfWrongGuesses == 8) {
@@ -55,11 +63,11 @@ public class HangmanLogic {
 	  }
 			 
  }
- 
+ // prompts and handles user input
  public void getUserInput() {
 	 validatedGuess = false;
 	while(validatedGuess == false) {
-	 System.out.println("Please enter a letter");
+		System.out.println("Take a guess!");
 	 userGuess = sc.nextLine();
 	 if(userGuess.length() == 1 && Character.isLetter(userGuess.charAt(0))) {
 	 validatedGuess = true;
@@ -74,7 +82,7 @@ public class HangmanLogic {
 	}
 	 
  }
- 
+ // The main menu for the game
  public void menu() throws IOException, MalformedURLException {
 	 System.out.println("--welcome, to start game type start and press Enter");
 	 System.out.println();
@@ -91,27 +99,30 @@ public class HangmanLogic {
 		 userChoice = sc.nextLine();
 		 if(userChoice.toLowerCase().equals("start")) {
 			 rwfw.ReadInput("");
-			 gameLogic();
+			 gameLoop();
 		 } else if(userChoice.toLowerCase().contains("wikipedia")) {
 				 rwfw.ReadInput(userChoice.toLowerCase());
-			 gameLogic();
+			 gameLoop();
 		 } else if(userChoice.toLowerCase().equals("quit")) {
 			 System.out.println("Are you sure you want to terminate?  yes / no. ");
 			 userGuess = sc.nextLine();
 			 if(userGuess.toLowerCase().equals("yes")) {
 			 System.exit(0);
-		 } else {
+		 }else {
+			 menu();
+		 } }else {
 			 System.out.println();
 			 System.out.println("Could not understand command, Please try again");
 			 System.out.println();
 			 menu();
 		 }
-	 }
+	 
 	 }
 	
  }
  
- public void gameLogic() {
+ // Game loop
+ public void gameLoop() {
 	 chooseRandomWord();
 	 while(wrongGuess < 10) {
 		 System.out.println();
@@ -124,12 +135,14 @@ public class HangmanLogic {
 	 }
  }
  
+ // Chooses random word
  public void chooseRandomWord() {
 	gameWords = rwfw.getResult();
 	random = (int)(Math.random() * gameWords.size() + 0);
 	gameWord = gameWords.get(random).toLowerCase();
  }
  
+ // Presents the "ghost word" / dots
  public void gameField() {
 	 if(gameStarted == false) {
 	 ghostWord = new char[gameWord.length()];
@@ -141,6 +154,7 @@ public class HangmanLogic {
 	 System.out.println();
  }
  
+ // Tests user guess.
  public void testGuess() {
 	 gameStarted = true;
 	 matchFound = false;
@@ -163,6 +177,7 @@ public class HangmanLogic {
 	 }
  }
  
+ //Checks if game is over and user won
  public void testIfWin() {
 	 testForMatch = new char[gameWord.length()];
 	 for(int i = 0; i < gameWord.length(); i++) {
@@ -171,19 +186,17 @@ public class HangmanLogic {
 	 winGame = true;
 	 int i = 0;
 	while(winGame == true && i < gameWord.length()) {
-		
 		if(ghostWord[i] == testForMatch[i] ) {
 			winGame = true;
 		} else {
 			winGame = false;
-
 		}
 		i++;
 	}
 	if(winGame == true) {
-
 		System.out.println();
 		  System.out.println("YOU WON!, hit Enter to restart application");
+		  HighScore.addScore(wrongGuess);
 			System.out.println();
 			userGuess = sc.nextLine();
 			try {

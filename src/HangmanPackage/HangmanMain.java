@@ -9,6 +9,7 @@ public class HangmanMain {
 
 		HangmanLogic hl = new HangmanLogic();
 		hl.menu();
+		
 
 	}
 }
