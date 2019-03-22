@@ -11,5 +11,8 @@ public class HangmanMain {
 		hl.menu();
 		
 
+	
+		
+
 	}
 }

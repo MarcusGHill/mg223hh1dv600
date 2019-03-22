@@ -1,14 +1,24 @@
 package HangmanPackage.HangmanTests;
-import HangmanPackage.Nickname;
+import HangmanPackage.HighScore;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
 
 public class checkNickNamesTest {
-
 	@Test
 	void checkNickNameTest() {
-		assertTrue(Nickname.checkNickNames());
+		HighScore.addScore(10, "Winner name");
+		String expected = "Winner name";
+		String accual = HighScore.getNicknameOfWinner();
+		assertEquals(expected, accual);
+		HighScore.addScore(5, "new Winner name");
+		expected = "new Winner name";
+		accual = HighScore.getNicknameOfWinner();
+		assertEquals(expected, accual);
+		HighScore.addScore(1, "finalWinner");
+		expected = "finalWinner";
+		accual = HighScore.getNicknameOfWinner();
+		assertEquals(expected, accual);
 	}
 }

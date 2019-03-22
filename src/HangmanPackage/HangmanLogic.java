@@ -22,6 +22,7 @@ public class HangmanLogic {
     private char[] ghostWord;
     private String wrongGuesses = "";
     
+    private int totalGuesses = 0;
     private int wrongGuess = 0;
     private Boolean matchFound = false;
     private Boolean gameStarted = false;
@@ -60,9 +61,9 @@ public class HangmanLogic {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-	  }
-			 
+	  }	 
  }
+ 
  // prompts and handles user input
  public void getUserInput() {
 	 validatedGuess = false;
@@ -79,9 +80,9 @@ public class HangmanLogic {
 		 System.exit(0);
 		 } 
 	 }
-	}
-	 
+	} 
  }
+ 
  // The main menu for the game
  public void menu() throws IOException, MalformedURLException {
 	 System.out.println("--welcome, to start game type start and press Enter");
@@ -89,7 +90,11 @@ public class HangmanLogic {
 	 System.out.println("--if you want to choose what wikipedia site to fetch your words from type the adress");
 	 System.out.println("and press enter to start the game. Type quit at any time terminate the application");
 	 System.out.println("Example https://en.wikipedia.org/wiki/Stockholm");
+	 System.out.println();
+	 System.out.println("--To see the highest score in game type highscore and hit enter ");
 	 initializeHangMan();
+	 // Reset variables
+	 totalGuesses = 0;
 	 wrongGuesses = "";
 	 validatedChoice = false;
 	 matchFound = false;
@@ -110,7 +115,12 @@ public class HangmanLogic {
 			 System.exit(0);
 		 }else {
 			 menu();
-		 } }else {
+		 } } else if(userChoice.toLowerCase().equals("highscore")) {
+			 System.out.println();
+			System.out.println(HighScore.getHighScore()); 
+			 System.out.println();
+			 menu();
+		 }else {
 			 System.out.println();
 			 System.out.println("Could not understand command, Please try again");
 			 System.out.println();
@@ -131,6 +141,7 @@ public class HangmanLogic {
 		 gameField();
 		 getUserInput();
 		 testGuess();
+		 totalGuesses++;
 		 
 	 }
  }
@@ -195,10 +206,13 @@ public class HangmanLogic {
 	}
 	if(winGame == true) {
 		System.out.println();
-		  System.out.println("YOU WON!, hit Enter to restart application");
-		  HighScore.addScore(wrongGuess);
+		  System.out.println("YOU WON!, enter name to and hit Enter to save score, or hit enter to restart application");
 			System.out.println();
 			userGuess = sc.nextLine();
+			if(userGuess.length() > 0) {
+			HighScore.addScore(totalGuesses, userGuess);
+			System.out.println("Score saved!");
+			}
 			try {
 				menu();
 			} catch (MalformedURLException e) {
